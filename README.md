@@ -20,7 +20,7 @@ vault server -dev -dev-root-token-id="dev-only-token"
 The run the Spring Boot application using the following command:
 
 ```bash
-./mvnw spring-boot:run
+./gradlew --no-daemon bootRun
 ```
 
 ## Reference Documentation
