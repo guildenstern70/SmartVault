@@ -9,15 +9,16 @@ package net.littlelite.vault;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
-class VaultApplicationTests {
-
+@ActiveProfiles("test")
+class VaultApplicationTests
+{
 	@Test
 	void contextLoads() {
 		assertThat(true).isTrue();
 	}
-
 }

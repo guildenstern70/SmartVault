@@ -8,6 +8,7 @@
 package net.littlelite.vault.batch;
 
 import net.littlelite.vault.VaultApplication;
+import net.littlelite.vault.config.BatchConfiguration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.BatchStatus;

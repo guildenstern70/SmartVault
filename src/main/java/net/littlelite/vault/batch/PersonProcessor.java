@@ -12,11 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.infrastructure.item.ItemProcessor;
 
-public class PersonProcessor implements ItemProcessor<PersonDto, PersonDto> {
+public class PersonProcessor implements ItemProcessor<PersonDto, PersonDto>
+{
     private static final Logger log = LoggerFactory.getLogger(PersonProcessor.class);
 
     @Override
-    public PersonDto process(final PersonDto personDto) {
+    public PersonDto process(final PersonDto personDto)
+    {
 
         final String firstName = personDto.firstName().toUpperCase();
         final String lastName = personDto.lastName().toUpperCase();

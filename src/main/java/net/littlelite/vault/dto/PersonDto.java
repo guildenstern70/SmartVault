@@ -7,4 +7,6 @@
 
 package net.littlelite.vault.dto;
 
-public record PersonDto(String firstName, String lastName) { }
+public record PersonDto(String firstName, String lastName)
+{
+}
