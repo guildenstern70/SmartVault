@@ -20,8 +20,10 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-batch")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-batch-test")
+	testImplementation("org.assertj:assertj-core:3.27.7")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

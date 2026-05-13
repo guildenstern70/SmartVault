@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class VaultApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(VaultApplication.class, args);
+
+		System.exit(SpringApplication.exit(SpringApplication.run(VaultApplication.class, args)));
 	}
 
 }
+
