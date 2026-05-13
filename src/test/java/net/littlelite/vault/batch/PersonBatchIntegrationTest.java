@@ -21,7 +21,8 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBatchTest
-@SpringBootTest(classes = {VaultApplication.class, BatchConfiguration.class})
+@SpringBootTest(classes = {VaultApplication.class,
+                           BatchConfiguration.class})
 @ActiveProfiles("test")
 class PersonBatchIntegrationTest {
 
