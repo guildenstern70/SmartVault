@@ -7,6 +7,7 @@
 
 package net.littlelite.vault.batch;
 
+import net.littlelite.vault.dto.PersonDto;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
@@ -17,20 +18,22 @@ import org.springframework.batch.infrastructure.item.database.builder.JdbcBatchI
 import org.springframework.batch.infrastructure.item.file.FlatFileItemReader;
 import org.springframework.batch.infrastructure.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
+@Configuration
 public class BatchConfiguration {
     @Bean
-    public FlatFileItemReader<Person> reader() {
-        return new FlatFileItemReaderBuilder<Person>()
+    public FlatFileItemReader<PersonDto> reader() {
+        return new FlatFileItemReaderBuilder<PersonDto>()
                 .name("personItemReader")
                 .resource(new ClassPathResource("sample-data.csv"))
                 .delimited()
                 .names("firstName", "lastName")
-                .targetType(Person.class)
+                .targetType(PersonDto.class)
                 .build();
     }
 
@@ -40,9 +43,9 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public JdbcBatchItemWriter<Person> writer(DataSource dataSource) {
-        return new JdbcBatchItemWriterBuilder<Person>()
-                .sql("INSERT INTO people (first_name, last_name) VALUES (:firstName, :lastName)")
+    public JdbcBatchItemWriter<PersonDto> writer(DataSource dataSource) {
+        return new JdbcBatchItemWriterBuilder<PersonDto>()
+                .sql("INSERT INTO persons (first_name, last_name) VALUES (:firstName, :lastName)")
                 .dataSource(dataSource)
                 .beanMapped()
                 .build();
@@ -57,10 +60,10 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public Step step1(JobRepository jobRepository, DataSourceTransactionManager transactionManager,
-                      FlatFileItemReader<Person> reader, PersonProcessor processor, JdbcBatchItemWriter<Person> writer) {
+    public Step step1(JobRepository jobRepository, PlatformTransactionManager transactionManager,
+                      FlatFileItemReader<PersonDto> reader, PersonProcessor processor, JdbcBatchItemWriter<PersonDto> writer) {
         return new StepBuilder(jobRepository)
-                .<Person, Person>chunk(3)
+                .<PersonDto, PersonDto>chunk(3)
                 .transactionManager(transactionManager)
                 .reader(reader)
                 .processor(processor)

@@ -7,6 +7,7 @@
 
 package net.littlelite.vault.batch;
 
+import net.littlelite.vault.dto.PersonDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;
@@ -33,8 +34,8 @@ public class JobCompletionNotificationListener implements JobExecutionListener {
             log.info("!!! JOB FINISHED! Time to verify the results");
 
             jdbcTemplate
-                    .query("SELECT first_name, last_name FROM people", new DataClassRowMapper<>(Person.class))
-                    .forEach(person -> log.info("Found <{}> in the database.", person));
+                    .query("SELECT first_name, last_name FROM persons", new DataClassRowMapper<>(PersonDto.class))
+                    .forEach(personDto -> log.info("Found <{}> in the database.", personDto));
         }
     }
 }

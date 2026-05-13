@@ -7,22 +7,23 @@
 
 package net.littlelite.vault.batch;
 
+import net.littlelite.vault.dto.PersonDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.infrastructure.item.ItemProcessor;
 
-public class PersonProcessor implements ItemProcessor<Person, Person> {
+public class PersonProcessor implements ItemProcessor<PersonDto, PersonDto> {
     private static final Logger log = LoggerFactory.getLogger(PersonProcessor.class);
 
     @Override
-    public Person process(final Person person) {
+    public PersonDto process(final PersonDto personDto) {
 
-        final String firstName = person.firstName().toUpperCase();
-        final String lastName = person.lastName().toUpperCase();
+        final String firstName = personDto.firstName().toUpperCase();
+        final String lastName = personDto.lastName().toUpperCase();
 
-        final Person transformedPerson = new Person(firstName, lastName);
+        final PersonDto transformedPerson = new PersonDto(firstName, lastName);
 
-        log.info("Converting ({}) into ({})", person, transformedPerson);
+        log.info("Converting ({}) into ({})", personDto, transformedPerson);
 
         return transformedPerson;
     }

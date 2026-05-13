@@ -5,8 +5,6 @@
  * See LICENSE
  */
 
-package net.littlelite.vault.batch;
+package net.littlelite.vault.dto;
 
-public record Person(String firstName, String lastName) {
-
-}
+public record PersonDto(String firstName, String lastName) { }
